@@ -21,7 +21,7 @@ a stack of blocks:
 - quantization for encoder features to be targets for contextual reps
 
 ### Feature encoder
-- stack of temporal convolution followed by GELU activation (embed figure from dan/kevin)
+- stack of temporal convolution followed by GELU activation
   - after first temporal convolution do group norm before GELU (split channels
     of convolution into groups, normalize within each group)
 - layer norm after last output
