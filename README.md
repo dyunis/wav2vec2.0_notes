@@ -36,7 +36,7 @@ A standard Transformer architecture with a modification to the positional
 embeddings
 
 #### Positional embeddings
-- convolutional layer with \\(k=128\\), \\(16\\) groups followed by GELU
+- convolutional layer with \\(k=128\\), \\(16\\) groups (channels?) followed by GELU
 - add output to inputs and apply layer norm
 
 ### Quantization
