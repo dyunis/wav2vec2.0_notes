@@ -80,11 +80,9 @@ similarity.
 To encourage even use of the whole codebook, maximize the entropy of the softmax
 distribution over codebook entries for each codebook:
 
-\\[ L_{diversity} = \frac{1}{GV} \sum_{g=1}^G \bar{p}_{g, v} 
-\log \bar{p}_{g, v} \\]
+\\[ L_{diversity} = \frac{1}{GV} \sum_{g=1}^G \bar{p_{ g,v }} \log \bar{p_{g,v}} \\]
 
-where \\( \bar{p}_{g,v} = 
-softmax(l_{g,v}) \\), the softmax distribution (instead of
+where \\( \bar{p_{g,v}} = softmax( l_{g,v})\\), the softmax distribution (instead of
 Gumbel-softmax with temperature).
 
 ##### Stability loss
