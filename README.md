@@ -1,11 +1,14 @@
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
 
 # [wav2vec 2.0: A Framework for Self-Supervised Learning of Speech Representations - Baevski et al. 2020](https://arxiv.org/abs/2006.11477)
 
 ## Summary
 
 ![wav2vec2.0](figs/baevski_fig1.png)
-Baevski et al. 2020
+<br>
+[Baevski et al. 2020]
 
 Devise a self-supervised contrastive setup (continuous inputs, discrete targets)
 that achieves SOTA on low-resource ASR with fine-tuning.
@@ -15,15 +18,17 @@ that achieves SOTA on low-resource ASR with fine-tuning.
 a stack of blocks:
 - feature encoder mapping waveform to representations
 - Transformer taking reps to new contextual representations
-- quantize encoder features to be targets for contextual reps
+- quantization for encoder features to be targets for contextual reps
 
 ### Feature encoder
 - stack of temporal convolution followed by GELU activation (embed figure from dan/kevin)
   - after first temporal convolution do group norm before GELU (split channels
     of convolution into groups, normalize within each group)
 - layer norm after last output
+
 ![normalizations](figs/wu_he_2018_groupnorm.png)
-Wu and He 2018
+<br>
+[Wu and He 2018]
 
 ### Transformer
 
@@ -155,7 +160,8 @@ Decoding at test:
 ## 5 Results
 
 ![table 1](figs/baevski_table1.png)
-Baevski et al. 2020
+<br>
+[Baevski et al. 2020]
 
 ### 5.1 Low-resource labeled data evaluation
 
@@ -174,7 +180,8 @@ By computing discrete latents for training data of TIMIT, and computing
 co-occurrence with phoneme labels, they make this plot:
 
 ![phones co-occurrence](figs/baevski_fig3.png)
-Baevski et al. 2020
+<br>
+[Baevski et al. 2020]
 
 ### 5.4 Ablations
 
