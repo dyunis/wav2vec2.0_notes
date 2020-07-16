@@ -47,7 +47,7 @@ estimator).
 
 #### Product quantization
 Given \\(G\\) codebooks containing \\(V\\) vectors of size \\(d/G\\), choose one
-entry from each codebook and concatentate to \\([e_1, ... e_G]\\) and apply a
+entry from each codebook and concatenate to \\([e_1, ... e_G]\\) and apply a
 transformation \\(\mathbb{R}^d \to \mathbb{R}^f\\) to get a quantization \\(q 
 \in \mathbb{R}^f\\)
 
