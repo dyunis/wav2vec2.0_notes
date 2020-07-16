@@ -73,21 +73,21 @@ uniformly as quantized reps from other timesteps in same utterance.
 The loss is given by
 \\[ L_{mask} = -\log \frac{\frac{\exp(sim(c_t, q_t))}{\kappa}}{\sum_{\tilde{q} \sim Q_t} \frac{\exp(sim(c_t, \tilde{q}))}{\kappa}} \\]
 
-where \\[sim(a,b) = \frac{a^T b}{\lVert a \rVert \lVert b\rVert}\\] is cosine
+where \\[ sim(a,b) = \frac{a^T b}{\lVert a \rVert \lVert b\rVert} \\] is cosine
 similarity.
 
 ##### Diversity loss
 To encourage even use of the whole codebook, maximize the entropy of the softmax
 distribution over codebook entries for each codebook:
 
-\\[L_{diversity} = \frac{1}{GV} \sum_{g=1}^G \bar{p}_{g,v} \log \bar{p}_{g,v}\\]
+\\[ L_{diversity} = \frac{1}{GV} \sum_{g=1}^G \overline{p_{ g,v }} \log \overline{p_{g,v}} \\]
 
-where \\(\bar{p}_{g,v} = softmax(l_{g,v})\\), the softmax distribution (instead of
+where \\( \overline{p_{g,v}} = softmax( l_{g,v})\\), the softmax distribution (instead of
 Gumbel-softmax with temperature).
 
 ##### Stability loss
 To stabilize feature encoder, apply L2 regularization on final output of feature
-encoder *before* last layer normalization. The encoder also has a scaled (down)
+encoder **before** last layer normalization. The encoder also has a scaled (down)
 learning rate by \\(\gamma\\).
 
 ### 3.3 Fine-tuning (supervised)
