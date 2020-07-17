@@ -189,7 +189,58 @@ Table 4 explains why quantization only happens for targets and not inputs
 (suggested that quantized targets give more robust training, while continuous
 inputs preserve more info).
 
-### Followup
+## Talk notes
+motivation: learn structure on unlabeled data, then leverage to increase
+sample efficiency on labeled data
 
-Can we take this out of the model setting and do it with YouTube data for a
-language we don't have LibriSpeech for?
+why sample from the same utterance? is there a benefit from keeping a buffer
+around of diverse samples?
+
+wav2vec:
+use CPC on contextual reps that come from convolutional encoder on waveform
+
+vq-wav2vec:
+encode waveform to rep, then quantize and use as input to convolutional stack
+that generates contextual representations, then input contextual to BERT
+(masking spans instead of tokens), then use output of BERT for acoustic features
+
+wav2vec 2.0:
+simplifies vq-wav2vec by a lot, take waveform, encode to reps with convolutinoal
+encoder, then quantize and pass un-quantized to Transformer that will output
+contextual reps, contrastive reconstruction loss using quantized as targets
+
+- contrastive task (maximizing log prob for correct softmax distribution using
+  cosine similarity as logit)
+- vector quantized targets means more robust reps (?)
+- fine-tuned on labeled data (no extra modules necessary)
+
+wav2letter decoder (figure out the PyTorch bindings to hook up to my code)
+
+competing approach:
+use a model to provide pseudo-labels, train on those labels, relabel, iterate...
+(noisy student)
+
+## Followup
+
+I think the benefit here is that the target is a perturbed (platonic) version of
+the representation, so you're not learning to memorize extra correlations, butextract some info (remember the ultimate goal is perturbation resilience).
+
+So I'm not positive you need an asymmetry in how the target and rep are generated,
+rather you just need them to be different in a certain fashion.
+
+One simple followup would be to test adding noise to make the target (instead of
+discretizing).
+
+For applications to cross-lingual pre-training (spoiler, multilingual
+pre-training is better), see [this paper](https://arxiv.org/abs/2006.13979)
+
+# [Unsupervised Cross-lingual Representation learning for Speech Recognition - Conneau et al. 2020](https://arxiv.org/abs/2006.13979)
+
+the same model and training, except form multlingual batches by sampling speech from a distribution
+\\[ p_l \sim \left ( \frac{n_l}{N} \right )^\alpha \\]
+where \\( n_l\\) is the number of hours of language \\( l \\), \\( N \\) is the
+total number of hours of data, and \\(\alpha\\) is a factor to upweight
+low-resource languages.
+
+They also try fine-tuning on many languages as well, and it's worse, but
+increasing model capacity helps (most results in Table 1 and Table 2).
